@@ -1,8 +1,9 @@
 import json
 import datetime
+import argparse
 from docx import Document
 
-def read_output(filename):
+def transcribe(filename):
     # Take the input as the filename
     filename_prefix = filename.split('.')[0]
 
@@ -54,5 +55,11 @@ def read_output(filename):
     # Save the document
     doc.save(f"{filename_prefix}_result.docx")
 
-read_output('thi5.json')
-print("done")
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--file", dest="filename",
+                    help="file to be transcribed", metavar="FILE")
+    
+    args = parser.parse_args()
+    
+    transcribe(args.filename)
